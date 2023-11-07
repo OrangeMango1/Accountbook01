@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 7));
-       // recyclerView.adapter =
+        recyclerView.setAdapter(CalendarAdapter);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
