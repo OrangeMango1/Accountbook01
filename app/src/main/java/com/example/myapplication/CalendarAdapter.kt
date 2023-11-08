@@ -12,7 +12,7 @@ import java.text.FieldPosition
 
 
 class CalendarAdapter : Recyclerview.Adapter<CalendarAdapter.ItemView>(){
-
+    private val array = ArrayList<Int>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemView {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_day,parent, false)
         return ItemView(view)
@@ -22,7 +22,12 @@ class CalendarAdapter : Recyclerview.Adapter<CalendarAdapter.ItemView>(){
         holder.textDay.setText("1")
     }
     override fun getItemCount(): Int{
-        return 7
+        return array.size
+    }
+    fun setList(array: ArrayList<Int>){
+        this.array.clear()
+        this.array.addAll(array)
+        notifyDataSetChanged()
     }
 
     class ItemView(view: View) : RecyclerView.ViewHolder(view){

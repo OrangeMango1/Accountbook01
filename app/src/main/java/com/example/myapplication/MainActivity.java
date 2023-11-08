@@ -6,6 +6,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+
+import android.util.Log;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
@@ -33,8 +35,22 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(CalendarAdapter);
 
         Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String formattedDate = dateFormat.format(calendar.getTime());
+        int firstDay = calendar.getActualMinimum(Calendar.DAY_OF_MONTH);
+        int lastDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+        ArrayList<Integer> arrayDay = new ArrayList<>();
+        for (int i = firstDay; i <= lastDay; i++) {
+            calendar.set(Calendar.DAY_OF_MONTH,1);
+
+            val dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+            if (i == 1 && dayOfWeek > 1){
+                for (j: Int in 1..dayOfWeek - 1)
+                    arrayDay.add(0);
+            }
+            arrayDay.add(i);
+        }
+        CalendarAdapter.setList(arrayDay)
+
+
 
 
 

@@ -1,26 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-    <TextView
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#808080"
-        android:gravity="center"
-        android:text="@string/calendar_title"
-        android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textSize="30sp" />
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        app:layout_constratintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/text_0"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="일"
+            android:textColor="@android:color/holo_red_dark"
+            app:layout_constraintEnd_toStartOf="@id/text_1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="월"
+            app:layout_constraintEnd_toStartOf="@id/text_2"
+            app:layout_constraintStart_toEndOf="@id/text_0"
+            app:layout_constraintTop_toTopOf="parent"/>
+        <TextView
+            android:id="@+id/text_2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="화"
+            app:layout_constraintEnd_toStartOf="@id/text_3"
+            app:layout_constraintStart_toEndOf="@id/text_1"
+            app:layout_constraintTop_toTopOf="parent"/>
+        <TextView
+            android:id="@+id/text_3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="수"
+            app:layout_constraintEnd_toStartOf="@id/text_4"
+            app:layout_constraintStart_toEndOf="@id/text_2"
+            app:layout_constraintTop_toTopOf="parent"/>
+        <TextView
+            android:id="@+id/text_4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="목"
+            app:layout_constraintEnd_toStartOf="@id/text_5"
+            app:layout_constraintStart_toEndOf="@id/text_3"
+            app:layout_constraintTop_toTopOf="parent"/>
+        <TextView
+            android:id="@+id/text_5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="금"
+            app:layout_constraintEnd_toStartOf="@id/text_6"
+            app:layout_constraintStart_toEndOf="@id/text_4"
+            app:layout_constraintTop_toTopOf="parent"/>
+        <TextView
+            android:id="@+id/text_6"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="토"
+            android:textColor="@android:color/holo_blue_dark"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/text_5"
+            app:layout_constraintTop_toTopOf="parent"/>
+        
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#ccc"
+        app:layout_constraintTop_toBottomOf="@id/top" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        app:layout_constratintTop_toBottomOf="@id/top" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 
 
