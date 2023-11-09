@@ -8,8 +8,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
+import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -18,6 +21,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
+import java.util.Collections;
 
 import android.view.MenuItem;
 
@@ -30,28 +35,30 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Calendar calendar = Calendar.getInstance();
+        CalendarAdapter calendarAdapter = new CalendarAdapter(this);
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 7));
-        recyclerView.setAdapter(CalendarAdapter);
+        recyclerView.setAdapter(calendarAdapter);
 
-        Calendar calendar = Calendar.getInstance();
-        int firstDay = calendar.getActualMinimum(Calendar.DAY_OF_MONTH);
-        int lastDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
-        ArrayList<Integer> arrayDay = new ArrayList<>();
-        for (int i = firstDay; i <= lastDay; i++) {
-            calendar.set(Calendar.DAY_OF_MONTH,1);
+        TextView textMonth = findViewById(R.id.text_month);
+        ImageButton btnLeft = findViewById(R.id.btn_left);
+        ImageButton btnRight = findViewById(R.id.btn_right);
 
-            val dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
-            if (i == 1 && dayOfWeek > 1){
-                for (j: Int in 1..dayOfWeek - 1)
-                    arrayDay.add(0);
+        btnLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // btnLeft를 클릭했을 때 수행할 작업
             }
-            arrayDay.add(i);
-        }
-        CalendarAdapter.setList(arrayDay)
+        });
 
-
-
+        btnRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // btnRight를 클릭했을 때 수행할 작업
+            }
+        });
+        calendarShow(calendar);
 
 
 
@@ -101,7 +108,30 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-}
+    private void calendarShow(Calendar calendar) {
+        int firstDay = calendar.getActualMinimum(Calendar.DAY_OF_MONTH);
+        int lastDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+        ArrayList<Long> arrayDay = new ArrayList<>();
+
+        for (int i = firstDay; i <= lastDay; i++) {
+            calendar.set(Calendar.DAY_OF_MONTH, 1);
+
+            int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+            if (i == 1 && dayOfWeek > 1) {
+                for (int j = 1; j <= dayOfWeek - 1; j++) {
+                    Calendar lastCalendar = Calendar.getInstance();
+                    lastCalendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) - 1);
+                    int lastMonth_lastDay = (lastCalendar.getActualMaximum(Calendar.DAY_OF_MONTH) - (j - 1));
+                    lastCalendar.set(Calendar.DAY_OF_MONTH, lastMonth_lastDay);
+                    arrayDay.add(lastCalendar.getTimeInMillis());
+                }
+                Collections.sort(arrayDay);
+            }
+            arrayDay.add(calendar.getTimeInMillis());
+        }
+        CalendarAdapter.setList(arrayDay, calendar.get(Calendar.MONTH));
+    }}
+
 
 
 
