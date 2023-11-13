@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new GridLayoutManager(this, 7));
         recyclerView.setAdapter(calendarAdapter);
 
+
         TextView textMonth = findViewById(R.id.text_month);
         ImageButton btnLeft = findViewById(R.id.btn_left);
         ImageButton btnRight = findViewById(R.id.btn_right);
@@ -49,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // btnLeft를 클릭했을 때 수행할 작업
+                calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) - 1);
+                calendarShow(calendar);
             }
         });
 
@@ -132,7 +135,5 @@ public class MainActivity extends AppCompatActivity {
         }
         CalendarAdapter.setList(arrayDay, calendar.get(Calendar.MONTH));
     }}
-
-
 
 

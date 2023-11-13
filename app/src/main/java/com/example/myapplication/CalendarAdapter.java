@@ -17,8 +17,8 @@ import java.util.Calendar;
 
 public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.ItemView> {
     private Context context;
-    private ArrayList<Long> array = new ArrayList<>();
-    private int month = 0;
+    private static ArrayList<Long> array = new ArrayList<>();
+    private static int month = 0;
 
     public CalendarAdapter(Context context) {
         this.context = context;
